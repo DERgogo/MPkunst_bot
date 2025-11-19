@@ -1,5 +1,5 @@
-import asyncio
-from bot import app
+from bot import build_bot
 
 if __name__ == "__main__":
-    asyncio.run(app.run_polling())
+    app = build_bot()
+    app.run_polling()
