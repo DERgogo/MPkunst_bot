@@ -1,24 +1,23 @@
-import json, os
+import json
+from pathlib import Path
 
-DATA_FILE = "app/data/user_data.json"
+DATA_FILE = Path("data/xp.json")
 
-def load_data():
-    if not os.path.exists(DATA_FILE):
-        return {}
-    with open(DATA_FILE, "r") as f:
-        return json.load(f)
+def load_xp():
+    if DATA_FILE.exists():
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {}
 
-def save_data(data):
+def save_xp(data):
+    DATA_FILE.parent.mkdir(exist_ok=True)
     with open(DATA_FILE, "w") as f:
         json.dump(data, f)
 
 def add_xp(user_id, amount):
-    data = load_data()
-    if user_id not in data:
-        data[user_id] = 0
-    data[user_id] += amount
-    save_data(data)
+    data = load_xp()
+    data[user_id] = data.get(user_id, 0) + amount
+    save_xp(data)
 
 def get_xp(user_id):
-    data = load_data()
-    return data.get(user_id, 0)
+    return load_xp().get(user_id, 0)
