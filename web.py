@@ -15,5 +15,5 @@ async def webhook(request: Request):
     return {"ok": True}
 
 @app.get("/")
-async def root():
+def root():
     return {"status": "running"}
