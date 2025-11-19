@@ -1,10 +1,9 @@
-from telegram.ext import ApplicationBuilder, CommandHandler
+from telegram.ext import ApplicationBuilder
 from config import BOT_TOKEN
-from Handlers.menu_handler import start, get_handlers
+from Handlers.menu_handler import get_handler  # oder wie auch immer der Pfad heißt
 
 def build_bot():
     application = ApplicationBuilder().token(BOT_TOKEN).build()
-    application.add_handler(CommandHandler("start", start))
-    for handler in get_handlers():
-        application.add_handler(handler)
+    application.add_handler(get_handler())
+    # Weitere Handler (z.B. CallbackQueryHandler für die Buttons) hier adden!
     return application
