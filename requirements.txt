@@ -1,4 +1,0 @@
-python-telegram-bot[ext]==21.4
-fastapi
-uvicorn
-pydantic
