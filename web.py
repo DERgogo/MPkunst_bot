@@ -1,11 +1,9 @@
 from fastapi import FastAPI, Request
 from telegram import Update
-from telegram.ext import ApplicationBuilder
-from config import BOT_TOKEN
+from bot import build_bot
 
 app = FastAPI()
-
-telegram_app = ApplicationBuilder().token(BOT_TOKEN).build()
+telegram_app = build_bot()
 
 @app.post("/webhook")
 async def webhook(request: Request):
@@ -15,5 +13,5 @@ async def webhook(request: Request):
     return {"ok": True}
 
 @app.get("/")
-def root():
+async def root():
     return {"status": "running"}
